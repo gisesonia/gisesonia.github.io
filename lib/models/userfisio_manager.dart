@@ -2,19 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../helpers/firebase_erros.dart';
+import '../models/user_fisio.dart';
 
-import '../models/user.dart';
-
-class UserManagerPaciente extends ChangeNotifier {
-  UserManagerPaciente() {
+class UserFisioManager extends ChangeNotifier {
+  UserFisioManager() {
     _loadCurrentUser();
   }
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  UserFb user; //Usuário do firebase
+  UserFisio user; //Usuário do firebase
 
   bool _loading = false;
   bool get loading => _loading;
@@ -24,12 +24,12 @@ class UserManagerPaciente extends ChangeNotifier {
   bool admin = true;
 
   Future<void> signIn(
-      {UserFb userfb, Function onFail, Function onSuccess}) async {
+      {UserFisio userfisio, Function onFail, Function onSuccess}) async {
     loading = true;
     try {
       final UserCredential result = await auth.signInWithEmailAndPassword(
-          email: userfb.email,
-          password: userfb.password); //Usuário da classe user.dart
+          email: userfisio.email,
+          password: userfisio.password); //Usuário da classe user.dart
 
       await _loadCurrentUser(firebaseUser: result.user); //
 
@@ -41,18 +41,18 @@ class UserManagerPaciente extends ChangeNotifier {
   }
 
   Future<void> signUp(
-      {UserFb userfb, Function onFail, Function onSuccess}) async {
+      {UserFisio userfisio, Function onFail, Function onSuccess}) async {
     loading = true;
     try {
       final UserCredential result = await auth.createUserWithEmailAndPassword(
-          email: userfb.email, password: userfb.password);
+          email: userfisio.email, password: userfisio.password);
 
-      userfb.id = result.user.uid;
+      userfisio.id = result.user.uid;
       this.user = user;
 
       //print(result);
 
-      await userfb.saveData(); //salva os dados do usuário
+      await userfisio.saveData(); //salva os dados do usuário
 
       onSuccess();
     } on PlatformException catch (e) {
@@ -77,10 +77,23 @@ class UserManagerPaciente extends ChangeNotifier {
     if (currentUser != null) {
       //user = currentUser;
       //print(user.uid);
-      final DocumentSnapshot docUser =
-          await firestore.collection('pacientes').doc(currentUser.uid).get();
-      user = UserFb.fromDocument(docUser);
+      final DocumentSnapshot docUser = await firestore
+          .collection('fisioterapeutas')
+          .doc(currentUser.uid)
+          .get();
+      user = UserFisio.fromDocument(docUser);
+
+      final docAdmin =
+          await firestore.collection('fisioterapeutas').doc(user.id).get();
+      if (docAdmin.exists) {
+        user.admin = true;
+      }
+
+      print(user.admin);
+
       notifyListeners();
     }
   }
+
+  bool get adminEnabled => user != null && user.admin;
 }

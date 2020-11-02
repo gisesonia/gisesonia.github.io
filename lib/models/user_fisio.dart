@@ -1,37 +1,38 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UserFb {
+class UserFisio {
   //construtor da classe de usuário
-  UserFb(
-      {this.name,
-      this.cpf,
-      this.email,
-      this.telephone,
+  UserFisio(
+      {this.email,
       this.password,
+      this.name,
+      this.crefito,
+      this.telephone,
       this.admin,
       this.id});
 
-  UserFb.fromDocument(DocumentSnapshot document) {
+  UserFisio.fromDocument(DocumentSnapshot document) {
     id = document.id;
     name = document.data()['name'] ?? '';
-    cpf = document.data()['cpf'] ?? '';
     email = document.data()['email'] ?? '';
+    crefito = document.data()['crefito'] ?? '';
     telephone = document.data()['telephone'] ?? '';
-    admin = document.data()['admin'] ?? 'false';
+    admin = document.data()['admin'] ?? 'true';
   }
 
   String id;
   String name;
-  String cpf;
+  String crefito;
   String email;
   int telephone;
   String password;
+
   bool admin;
 
   String confirmPassword;
 
   DocumentReference get firestoreRef =>
-      FirebaseFirestore.instance.doc('pacientes/$id');
+      FirebaseFirestore.instance.doc('fisioterapeutas/$id');
 
   //salvando os dados no firebase
   Future<void> saveData() async {
@@ -43,9 +44,9 @@ class UserFb {
     return {
       'name': name,
       'email': email,
-      'cpf': cpf,
+      'crefito': crefito,
       'telephone': telephone,
-      'admin': false
+      'admin': true
     };
   }
 }
