@@ -1,12 +1,13 @@
-import 'package:crud_firestore/screens/listapacientes_screen.dart';
-import 'package:crud_firestore/screens/profile_fisio_screen.dart';
-import 'package:crud_firestore/screens/sessoesfisioscreen.dart';
+import './listapacientes_screen.dart';
+import './profile_fisio_screen.dart';
 import 'package:flutter/material.dart';
+
+import './sessoesfisioscreen.dart';
 
 class HomeFisioScreen extends StatefulWidget {
   //static const route = '/';
   HomeFisioScreen(this.userId, {Key key}) : super(key: key);
-  String userId;
+  final String userId;
 
   @override
   _HomeFisioScreenState createState() => _HomeFisioScreenState();
