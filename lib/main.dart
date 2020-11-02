@@ -4,10 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'providers/sessao_provider.dart';
-import 'screens/base.dart';
 
 import './models/userfisio_manager.dart';
-
 import 'screens/addeditsessao_screen.dart';
 import 'screens/homefisio_screen.dart';
 import 'screens/home_screen.dart';
