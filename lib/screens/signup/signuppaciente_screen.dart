@@ -149,6 +149,8 @@ class _SignUpPacienteScreenState extends State<SignUpPacienteScreen> {
                               context.read<UserManagerPaciente>().signUp(
                                     userfb: user,
                                     onSuccess: () {
+                                      Navigator.of(context)
+                                          .pushNamed('pacientelogin');
                                       debugPrint('sucesso');
                                     },
                                     onFail: (e) {

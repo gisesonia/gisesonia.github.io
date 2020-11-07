@@ -1,3 +1,4 @@
+import 'package:crud_firestore/screens/login/fisiologin_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -145,6 +146,8 @@ class _SignUpFisioScreenState extends State<SignUpFisioScreen> {
                               context.read<UserFisioManager>().signUp(
                                     userfisio: user,
                                     onSuccess: () {
+                                      Navigator.of(context)
+                                          .pushNamed('fisiologin');
                                       debugPrint('sucesso');
                                     },
                                     onFail: (e) {
