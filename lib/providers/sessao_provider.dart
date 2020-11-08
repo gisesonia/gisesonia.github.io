@@ -1,3 +1,5 @@
+import 'package:crud_firestore/models/user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:uuid/uuid.dart';
@@ -7,6 +9,8 @@ import '../models/sessao.dart';
 
 class SessaoProvider with ChangeNotifier {
   final firestoreService = FirestoreService();
+
+  UserFb userfilter;
 
   String _sessaoId;
   String _fisioId;
@@ -27,6 +31,8 @@ class SessaoProvider with ChangeNotifier {
   String get description => _description;
   String get exerciseUrl => _exerciseUrl;
   Stream<List<Sessao>> get sessoes => firestoreService.getSessoes();
+  /* Stream<List<Sessao>> get sessao1 =>
+      firestoreService.getSessaoById(userfilter.cpf); */
 
   //Setters
   set changeFisioId(String fisioId) {
@@ -66,6 +72,7 @@ class SessaoProvider with ChangeNotifier {
 
 //Funções
   loadAll(Sessao sessao) {
+    print(UserFb);
     if (sessao != null) {
       _fisioId = sessao.fisioId;
       _fisioName = sessao.fisioName;
