@@ -82,7 +82,7 @@ class UserFisioManager extends ChangeNotifier {
           .doc(currentUser.uid)
           .get();
       user = UserFisio.fromDocument(docUser);
-
+//atribui true or false para o usuário
       final docAdmin =
           await firestore.collection('fisioterapeutas').doc(user.id).get();
       if (docAdmin.exists) {
