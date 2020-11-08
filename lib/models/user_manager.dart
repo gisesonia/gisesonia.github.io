@@ -55,7 +55,7 @@ class UserManagerPaciente extends ChangeNotifier {
       await userfb.saveData(); //salva os dados do usuário
 
       onSuccess();
-    } on PlatformException catch (e) {
+    } on FirebaseAuthException catch (e) {
       onFail(getErrorString(e.code));
     }
     loading = false;
