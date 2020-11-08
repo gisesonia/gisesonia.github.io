@@ -14,6 +14,7 @@ class _ProfilePacienteScreenState extends State<ProfilePacienteScreen> {
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
     return Container(
+      height: _screenSize.height * 0.8, //ocupa 80% da tela
       padding: const EdgeInsets.fromLTRB(32, 24, 16, 8),
       child: Consumer<UserManagerPaciente>(
         builder: (_, userManager, __) {
@@ -43,6 +44,27 @@ class _ProfilePacienteScreenState extends State<ProfilePacienteScreen> {
                   ),
                 ),
               ),
+              userManager.isLoggedIn
+                  ? SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(38.0),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'sessaopaciente');
+                        },
+                        color: Theme.of(context).primaryColor,
+                        child: Text(
+                          "Minhas sessões",
+                          style: TextStyle(
+                              color: Color.fromRGBO(255, 255, 255, 1),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        ),
+                      ),
+                    )
+                  : Container(),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: GestureDetector(
@@ -63,23 +85,6 @@ class _ProfilePacienteScreenState extends State<ProfilePacienteScreen> {
                   ),
                 ),
               ),
-              userManager.isLoggedIn
-                  ? SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      child: RaisedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, 'sessaopaciente');
-                        },
-                        child: Text(
-                          "Minhas sessões",
-                          style: TextStyle(
-                              color: Color.fromRGBO(255, 51, 1, 1),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        ),
-                      ),
-                    )
-                  : Container(),
             ],
           );
         },
