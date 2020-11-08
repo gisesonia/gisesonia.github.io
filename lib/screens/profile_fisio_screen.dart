@@ -14,7 +14,6 @@ class _ProfileFisioScreenState extends State<ProfileFisioScreen> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(32, 24, 16, 8),
-      height: 180,
       child: Consumer<UserFisioManager>(
         builder: (_, userManager, __) {
           if (userManager.adminEnabled) {
@@ -23,7 +22,7 @@ class _ProfileFisioScreenState extends State<ProfileFisioScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Text(
-                  'Meu cadastro',
+                  'Área do fisioterapeuta',
                   style: TextStyle(
                     fontSize: 34,
                     fontWeight: FontWeight.bold,
@@ -38,6 +37,27 @@ class _ProfileFisioScreenState extends State<ProfileFisioScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                userManager.isLoggedIn
+                    ? SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(38.0),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, 'homefisio');
+                          },
+                          color: Theme.of(context).primaryColor,
+                          child: Text(
+                            "Administrar Sessões",
+                            style: TextStyle(
+                                color: Color.fromRGBO(255, 255, 255, 1),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
+                        ),
+                      )
+                    : Container(),
                 GestureDetector(
                   onTap: () {
                     if (userManager.isLoggedIn) {
