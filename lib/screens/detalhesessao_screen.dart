@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../models/sessao.dart';
 import '../providers/sessao_provider.dart';
 
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
 
 class DetalheSessaoScreen extends StatefulWidget {
   final Sessao sessao;
@@ -20,33 +21,50 @@ class _DetalheSessaoScreenState extends State<DetalheSessaoScreen> {
   @override
   Widget build(BuildContext context) {
     final sessaoProvider = Provider.of<SessaoProvider>(context);
-    var url = sessaoProvider.exerciseUrl;
+     var _launchUrl = widget.sessao.exerciseUrl;
 
-    YoutubePlayerController _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(url),
-      flags: YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-        disableDragSeek: false,
-        loop: false,
-        isLive: false,
-        forceHD: false,
-      ),
-    );
+   Future<void> _launchInBrowser(String url) async {
+      if (await canLaunch(url)) {
+        await launch(
+          url,
+          forceSafariVC: true,
+          forceWebView: false,
+          headers: <String, String>{'header_key': 'header_value'},
+        );
+      } else {
+        throw 'Could not launch $url';
+      }
+    }
 
     return Scaffold(
         appBar: AppBar(
           title: Text('Sessão'),
         ),
-        body: Container(
+        body: FutureBuilder(
+                future: _launched,
+                builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } else {
+                    return Container(
+                      child: Text(widget.sessao.pacienteName),
+                    );
+                  }
+                },
+              ),
+              Container(
           child: Column(
             children: [
-              YoutubePlayer(
-                controller: _controller,
-                liveUIColor: Colors.amber,
+               RaisedButton(
+                child: const Text('Launch In App'),
+                onPressed: () {
+                  setState(() {
+                    _launched = _launchInBrowser(_launchUrl);
+                  });
+                },
               ),
             ],
           ),
-        ));
+        ),);
   }
 }
