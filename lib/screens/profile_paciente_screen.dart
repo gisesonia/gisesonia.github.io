@@ -2,6 +2,8 @@ import 'package:crud_firestore/models/user_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'sessoespacientescreen.dart';
+
 class ProfilePacienteScreen extends StatefulWidget {
   ProfilePacienteScreen({Key key}) : super(key: key);
 
@@ -52,7 +54,9 @@ class _ProfilePacienteScreenState extends State<ProfilePacienteScreen> {
                           borderRadius: new BorderRadius.circular(38.0),
                         ),
                         onPressed: () {
-                          Navigator.pushNamed(context, 'sessaopaciente');
+                          Navigator.pushNamed(
+                              context, SessoesPacienteScreen.route,
+                              arguments: {'cpf': userManager.user.cpf});
                         },
                         color: Theme.of(context).primaryColor,
                         child: Text(
