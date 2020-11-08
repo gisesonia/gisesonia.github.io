@@ -1,4 +1,5 @@
 import 'package:crud_firestore/models/user_manager.dart';
+import 'package:crud_firestore/screens/sessoespacientescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         routes: {
           //HomeScreen.route: (_) => HomeFisioScreen(),
           //SessoesFisioScreen.route: (_) => SessoesFisioScreen(),
+          SessoesPacienteScreen.route: (_) => SessoesPacienteScreen(),
           EditaSessaoScreen.route: (_) => EditaSessaoScreen(),
           UserTypeScreen.route: (_) => UserTypeScreen(),
           //LaunchScreen.route: (_) => LaunchScreen(),
