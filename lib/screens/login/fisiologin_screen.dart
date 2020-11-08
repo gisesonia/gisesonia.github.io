@@ -103,15 +103,6 @@ class _FisioLoginScreenState extends State<FisioLoginScreen> {
                                         userfisio: UserFisio(
                                             email: emailController.text,
                                             password: passController.text),
-                                        onSuccess: () {
-                                          //debugPrint('sucesso');
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      HomeScreen(
-                                                          'fisioterapeutas')));
-                                        },
                                         onFail: (e) {
                                           scaffoldKey.currentState.showSnackBar(
                                             SnackBar(
@@ -120,6 +111,15 @@ class _FisioLoginScreenState extends State<FisioLoginScreen> {
                                               backgroundColor: Colors.red,
                                             ),
                                           );
+                                        },
+                                        onSuccess: () {
+                                          //debugPrint('sucesso');
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      HomeScreen(
+                                                          'fisioterapeutas')));
                                         },
                                       );
                                 }
