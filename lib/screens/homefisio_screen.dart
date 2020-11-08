@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import './sessoesfisioscreen.dart';
 
 class HomeFisioScreen extends StatefulWidget {
-  //static const route = '/';
+  static const route = 'homefisio';
   HomeFisioScreen(this.userId, {Key key}) : super(key: key);
   final String userId;
 
@@ -41,9 +41,9 @@ class _HomeFisioScreenState extends State<HomeFisioScreen> {
       body: PageView(
         controller: _pageController,
         children: <Widget>[
-          ProfileFisioScreen(),
           SessoesFisioScreen(),
-          PacientesFisioScreen()
+          PacientesFisioScreen(),
+          ProfileFisioScreen(),
         ],
         onPageChanged: (int index) {
           setState(() {
@@ -56,16 +56,16 @@ class _HomeFisioScreenState extends State<HomeFisioScreen> {
         selectedItemColor: Colors.amber[800],
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Meu perfil',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.description_sharp),
             label: 'Sessões',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.group),
             label: 'Pacientes',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Meu perfil',
           ),
         ],
         onTap: _onItemTapped,
