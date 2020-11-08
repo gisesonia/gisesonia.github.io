@@ -2,6 +2,8 @@ import 'package:crud_firestore/models/userfisio_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'usertype_screen.dart';
+
 class ProfileFisioScreen extends StatefulWidget {
   ProfileFisioScreen({Key key}) : super(key: key);
 
@@ -62,8 +64,11 @@ class _ProfileFisioScreenState extends State<ProfileFisioScreen> {
                   onTap: () {
                     if (userManager.isLoggedIn) {
                       userManager.signOut();
+                      Navigator.of(context, rootNavigator: true)
+                          .pushReplacement(MaterialPageRoute(
+                              builder: (context) => UserTypeScreen()));
                     } else {
-                      Navigator.of(context).pushNamed('fisiologin');
+                      Navigator.of(context).pop('fisiologin');
                     }
                   },
                   child: Text(
