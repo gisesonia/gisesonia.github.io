@@ -16,26 +16,6 @@ class FirestoreService {
         snapshot.docs.map((doc) => Sessao.fromJson(doc.data())).toList());
   }
 
-//seleciona a sessão por usuário
-  Stream<List<Sessao>> getSessaoById(_cpf) {
-    print(_cpf);
-    return _cpf != null
-        ? FirebaseFirestore.instance
-            .collection('sessoes')
-            .where("pacienteCpf", isEqualTo: _cpf)
-            .snapshots()
-            .map((snapshot) => snapshot.docs
-                .map((doc) => Sessao.fromJson(doc.data()))
-                .toList())
-        : null;
-    /* return _db
-        .collection('sessoes')
-        .where('pacienteCpf', isEqualTo: '333')
-        .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => Sessao.fromJson(doc.data())).toList()); */
-  }
-
 //Cria ou atualiza as sessoes, a variável options checa se é novo ou precisa criar
   Future<void> setSessao(Sessao sessao) {
     var options = SetOptions(merge: true);

@@ -31,8 +31,6 @@ class SessaoProvider with ChangeNotifier {
   String get description => _description;
   String get exerciseUrl => _exerciseUrl;
   Stream<List<Sessao>> get sessoes => firestoreService.getSessoes();
-  /* Stream<List<Sessao>> get sessao1 =>
-      firestoreService.getSessaoById(userfilter.cpf); */
 
   //Setters
   set changeFisioId(String fisioId) {
