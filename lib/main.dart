@@ -26,6 +26,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String usertype;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => SessaoProvider()),
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
           //HomeScreen.route: (_) => HomeFisioScreen(),
           //SessoesFisioScreen.route: (_) => SessoesFisioScreen(),
           SessoesPacienteScreen.route: (_) => SessoesPacienteScreen(),
+          HomeFisioScreen.route: (_) => HomeFisioScreen(usertype),
           EditaSessaoScreen.route: (_) => EditaSessaoScreen(),
           UserTypeScreen.route: (_) => UserTypeScreen(),
           //LaunchScreen.route: (_) => LaunchScreen(),
