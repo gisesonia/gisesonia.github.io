@@ -34,7 +34,7 @@ class UserFisioManager extends ChangeNotifier {
       await _loadCurrentUser(firebaseUser: result.user); //
 
       onSuccess();
-    } on PlatformException catch (e) {
+    } on FirebaseAuthException catch (e) {
       onFail(getErrorString(e.code));
     }
     loading = false;
@@ -55,7 +55,7 @@ class UserFisioManager extends ChangeNotifier {
       await userfisio.saveData(); //salva os dados do usuário
 
       onSuccess();
-    } on PlatformException catch (e) {
+    } on FirebaseAuthException catch (e) {
       onFail(getErrorString(e.code));
     }
     loading = false;
