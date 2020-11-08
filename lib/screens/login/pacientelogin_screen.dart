@@ -101,6 +101,15 @@ class _PacienteLoginScreenState extends State<PacienteLoginScreen> {
                                         userfb: UserFb(
                                             email: emailController.text,
                                             password: passController.text),
+                                        onFail: (e) {
+                                          scaffoldKey.currentState.showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text('Falha ao entrar: $e'),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        },
                                         onSuccess: () {
                                           //debugPrint('sucesso');
                                           Navigator.push(
@@ -108,15 +117,6 @@ class _PacienteLoginScreenState extends State<PacienteLoginScreen> {
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       HomeScreen('pacientes')));
-                                        },
-                                        onFail: (e) {
-                                          scaffoldKey.currentState.showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                  'Falha ao cadastrar: $e'),
-                                              backgroundColor: Colors.red,
-                                            ),
-                                          );
                                         },
                                       );
                                 }
