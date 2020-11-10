@@ -36,7 +36,7 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('flutter-first-frame', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js');
+        navigator.serviceWorker.register('flutter_service_worker.js?v=2947385473');
       });
     }
   </script>
@@ -44,18 +44,7 @@
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
   
-    <script>
-      var firebaseConfig = {
-    apiKey: "AIzaSyBNL6NjZEABO1cVTIKZSmHGTjPBAB5thM4",
-    authDomain: "crud-provider.firebaseapp.com",
-    databaseURL: 'https://crud-provider.firebaseio.com',
-    projectId: "crud-firestore-d4ac8",
-    storageBucket: "crud-firestore.appspot.com",
-    messagingSenderId:"",
-    appId:'1:20280568558:android:0ac289730ca31dc4f561ff',
-    measurementId: "G-XXXXXXXXXX"
-};
-    </script>
+    <script src="./firebase-config.js"></script>
     <script type="module">   
       import { firebaseConfig } from './firebase-config.js'; 
       // Initialize Firebase
