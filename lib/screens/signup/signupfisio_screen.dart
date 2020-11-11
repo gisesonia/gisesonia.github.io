@@ -1,4 +1,3 @@
-import 'package:crud_firestore/screens/login/fisiologin_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -16,8 +15,7 @@ class _SignUpFisioScreenState extends State<SignUpFisioScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final UserFisio user =
-      UserFisio(); //variável local não aplica na instância do firebase
+  final UserFisio user = UserFisio();
 
   final _formKey = GlobalKey<FormState>();
 

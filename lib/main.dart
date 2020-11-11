@@ -10,8 +10,6 @@ import 'providers/sessao_provider.dart';
 import './models/userfisio_manager.dart';
 import 'screens/addeditsessao_screen.dart';
 import 'screens/homefisio_screen.dart';
-import 'screens/home_screen.dart';
-import 'screens/sessoesfisioscreen.dart';
 import './screens/usertype_screen.dart';
 import 'screens/signup/signuppaciente_screen.dart';
 import 'screens/signup/signupfisio_screen.dart';
@@ -48,13 +46,10 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         routes: {
-          //HomeScreen.route: (_) => HomeFisioScreen(),
-          //SessoesFisioScreen.route: (_) => SessoesFisioScreen(),
           SessoesPacienteScreen.route: (_) => SessoesPacienteScreen(),
           HomeFisioScreen.route: (_) => HomeFisioScreen(usertype),
           EditaSessaoScreen.route: (_) => EditaSessaoScreen(),
           UserTypeScreen.route: (_) => UserTypeScreen(),
-          //LaunchScreen.route: (_) => LaunchScreen(),
           PacienteLoginScreen.route: (_) => PacienteLoginScreen(),
           SignUpPacienteScreen.route: (_) => SignUpPacienteScreen(),
           FisioLoginScreen.route: (_) => FisioLoginScreen(),

@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../providers/sessao_provider.dart';
 import '../models/sessao.dart';
-import 'addeditsessao_screen.dart';
 import 'detalhesessao_screen.dart';
 
 class SessoesPacienteScreen extends StatefulWidget {
@@ -17,9 +14,7 @@ class SessoesPacienteScreen extends StatefulWidget {
 class _SessoesPacienteScreenState extends State<SessoesPacienteScreen> {
   @override
   Widget build(BuildContext context) {
-    //final sessaoProvider = Provider.of<SessaoProvider>(context);
-    final Map arguments = ModalRoute.of(context).settings.arguments
-        as Map; // pega o cpf passado na tela anterior ProfilePacienteScreen
+    final Map arguments = ModalRoute.of(context).settings.arguments as Map;
     print(arguments);
     final _cpf = arguments['cpf'];
     return Scaffold(
@@ -35,25 +30,25 @@ class _SessoesPacienteScreenState extends State<SessoesPacienteScreen> {
                   .map((snapshot) => snapshot.docs
                       .map((doc) => Sessao.fromJson(doc.data()))
                       .toList())
-              : null, //documento do firebase
+              : null,
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.hasError) {
-              //checa se tem erro
-              print(snapshot.error);
-              //Center(child: Text('Error: ${snapshot.error}'))
+              return Expanded(
+                child: Center(
+                  child: Text('Dados não puderam ser carregados'),
+                ),
+              );
             }
             if (snapshot.hasData) {
-              print(snapshot.data);
-              //checa se tem dados, senão carrega um componente circular de loading
               return ListView.builder(
-                  itemCount: snapshot.data
-                      .length, //verifica a quantidade de itens da lista de sessões
+                  itemCount: snapshot.data.length,
                   itemBuilder: (context, index) {
                     if (snapshot.data == null) {
-                      print(snapshot.data);
-                      //verifica se tem itens
                       return Center(
-                          child: Container(child: Text('Sem registros')));
+                        child: Container(
+                          child: Text('Sem registros'),
+                        ),
+                      );
                     } else {
                       return Container(
                         margin: const EdgeInsets.all(8),

@@ -6,7 +6,6 @@ import '../models/sessao.dart';
 import 'addeditsessao_screen.dart';
 
 class SessoesFisioScreen extends StatelessWidget {
-  //static const route = '/';
   @override
   Widget build(BuildContext context) {
     final sessaoProvider = Provider.of<SessaoProvider>(context);
@@ -15,21 +14,26 @@ class SessoesFisioScreen extends StatelessWidget {
         title: Text('Sessões'),
       ),
       body: StreamBuilder<List<Sessao>>(
-          stream: sessaoProvider.sessoes, //documento do firebase
+          stream: sessaoProvider.sessoes,
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.hasError) {
-              //checa se tem erro
-              print(snapshot.error);
-              //Center(child: Text('Error: ${snapshot.error}'))
+              return Expanded(
+                child: Center(
+                  child: Text('Dados não puderam ser carregados'),
+                ),
+              );
             }
-            if (snapshot.hasData) {
-              //checa se tem dados, senão carrega um componente circular de loading
-              return ListView.builder(
-                  itemCount: snapshot.data
-                      .length, //verifica a quantidade de itens da lista de sessões
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return Center(child: CircularProgressIndicator());
+              default:
+                if (!snapshot.hasData) {
+                  return Text('Nenhuma sessão cadastrada');
+                }
+                return ListView.builder(
+                  itemCount: snapshot.data.length,
                   itemBuilder: (context, index) {
                     if (snapshot.data != null) {
-                      //verifica se tem itens
                       return Container(
                         margin: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
@@ -65,17 +69,21 @@ class SessoesFisioScreen extends StatelessWidget {
                             ],
                           ),
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
                                 builder: (context) => EditaSessaoScreen(
-                                      sessao: snapshot.data[index],
-                                    )));
+                                  sessao: snapshot.data[index],
+                                ),
+                              ),
+                            );
                           },
                         ),
                       );
+                    } else {
+                      return Center(child: CircularProgressIndicator());
                     }
-                  });
-            } else {
-              return Center(child: CircularProgressIndicator());
+                  },
+                );
             }
           }),
       floatingActionButton: FloatingActionButton(
