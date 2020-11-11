@@ -48,4 +48,13 @@ class UserFb {
       'admin': false
     };
   }
+
+  factory UserFb.fromJson(Map<String, dynamic> json) {
+    return UserFb(
+        id: json['id'],
+        name: json['name'],
+        email: json['email'],
+        cpf: json['cpf'],
+        telephone: json['telephone']);
+  }
 }

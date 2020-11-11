@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../helpers/firebase_erros.dart';
 
 import '../models/user.dart';
@@ -73,7 +72,7 @@ class UserManagerPaciente extends ChangeNotifier {
   }
 
   Future<void> _loadCurrentUser({User firebaseUser}) async {
-    final User currentUser = await firebaseUser ?? auth.currentUser;
+    final User currentUser = firebaseUser ?? auth.currentUser;
     if (currentUser != null) {
       //user = currentUser;
       //print(user.uid);
