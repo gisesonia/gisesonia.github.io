@@ -6,7 +6,6 @@ Tem funcionalidade de cadastro de usuários, cadastro de sessões, área de admi
 
 <img src="https://github.com/gisesonia/gisesonia.github.io/blob/main/Tela_Cadastro.png"/>
 
-
 ## Sobre o Flutter
 
 This project is a starting point for a Flutter application.
