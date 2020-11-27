@@ -1,10 +1,11 @@
 # FisioControl - projeto criado na faculdade
 
+Aplicativo criado com o framework multiplataforma flutter e firebase como backend.
+Tem funcionalidade de cadastro de usuários, cadastro de sessões, área de administrador e área do paciente que ele consegue abrir o navegador ou o app do Youtube.
+
 
 <img src="https://github.com/gisesonia/gisesonia.github.io/blob/main/Tela_Cadastro.png"/>
 
-Aplicativo criado com o framework multiplataforma flutter e firebase como backend.
-Tem funcionalidade de cadastro de usuários, cadastro de sessões, área de administrador e área do paciente que ele consegue abrir o navegador ou o app do Youtube.
 
 ## Sobre o Flutter
 
